@@ -1,77 +1,50 @@
 import Head from 'next/head'
+import Header  from '../components/Header'
+import Footer  from '../components/Footer'
 import Image from 'next/image'
-import {FaTshirt, FaShippingFast} from 'react-icons/fa';
-import {MdLocalOffer} from 'react-icons/md';
 import Link from 'next/link'
+import {SearchIcon, MicrophoneIcon} from '@heroicons/react/solid'
+import {useRouter} from 'next/router'
+import {useRef} from 'react'
 
 export default function Home() {
+  const router = useRouter();
+  const searchInputRef = useRef(null);
+
+  const search = (e)=>{
+    e.preventDefault();
+    const term = searchInputRef.current.value;
+    if(!term.trim()) return
+    router.push(`/search?term=${term.trim()}&searchType=`);
+  }
+
   return (
-    <div className="min-h-screen">
-      {/* <Head>
-        <title>nirucart - wear the code</title>
-        <meta name="descript ion" content="nirucart.com - wear the code" />
-        <link rel="icon" href="/favicon.jpg" />
-      </Head> */}
+    <div>
+      <Head>
+        <title>Google</title>
+        <meta name="descript ion" content="google clone app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      
+      {/* Header */}
+      <Header />
 
-      {/* <Navbar /> */}
-      <div className="flex flex-wrap m-8 mt-8 mb-20 sm:flex-col lg:flex-row items-center text-center">
-      <div className="lg:w-1/2">
-        <p className="m-8 text-center text-2xl font-mono leading-10 font-bold">&quot;Hey developers, now get your favourite ecessories here on <span className="text-3xl text-sky-500"><Link href={"/"}><a>nirukart.com</a></Link></span>.&quot; </p>
+      {/* body */}
+      <form className="flex flex-col items-center mt-40">
+        <Image width="300" objectFit='cover' height="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png" />
+        <div className="flex flex-row w-full mt-5 mx-auto max-w-[90%] border border-gray-200 hover:shadow-lg focus-within:shadow-lg px-5 py-3 rounded-full items-center sm:max-w-xl lg:max-w-2xl">
+          <SearchIcon className="h-5 text-gray-500" />
+          <input ref={searchInputRef} className="flex-grow focus:outline-none ml-3 mr-3" type="text" />
+          <MicrophoneIcon className="h-5" />
         </div>
-        <div className="lg:w-1/2">
-        <img className="" src="/home.jpg" alt="" />
+        <div className="flex flex-col sm:flex-row w-[50%] space-y-2 mt-8 sm:space-y-0 sm:space-x-4 justify-center">
+        <button onClick={search} className="btn">Google Search</button>
+        <button className="btn"><a href="https://www.google.com/doodles">I'm Feeling Lucky</a></button>
         </div>
-      </div>
+      </form>
 
-      <section className="text-gray-600 body-font">
-  <div className="container px-5 py-24 mx-auto">
-    <h1 className="text-gray-900 font-bold text-4xl title-font">Our Latest Collections</h1>
-    <div className="h-1 w-60 bg-sky-500 mb-8 mt-2 rounded"></div>
-    <div className="flex flex-wrap w-full mb-20 flex-row items-center text-center">
-      <div className="bg-gray-100 sm:w-1/2 lg:w-3/12 border-solid m-auto mb-20 border-2 border-sky-200 cursor-pointer p-4 rounded-lg"><Link href="/product/git-hub-black-XL"><a><img className="rounded h-80 w-full object-contain object-top mb-6" src="/images/git-hub-black.jpg" alt="content" /><h3 className="tracking-widest text-sky-500 text-xs font-medium title-font">Tshirts</h3><h2 className="text-lg text-gray-900 font-medium title-font mb-4">Img Src (XL/black)</h2><p className="leading-relaxed text-base">Available in multiple sizes</p></a></Link>
-      </div>
-      <div className="bg-gray-100  sm:w-1/2 lg:w-3/12 border-solid border-2 border-sky-200 cursor-pointer p-4 m-auto mb-20 rounded-lg"><Link href="/product/hprogrammer-blue-XXL"><a><img className="rounded h-80 w-full object-contain object-top mb-6" src="/images/hprogrammer-blue.jfif" alt="content" /><h3 className="tracking-widest text-sky-500 text-xs font-medium title-font">Hoodies</h3><h2 className="text-lg text-gray-900 font-medium title-font mb-4">Img Src (XXL/blue)</h2><p className="leading-relaxed text-base">Available in multiple sizes</p></a></Link>
-      </div>
-      <div className="bg-gray-100  sm:w-1/2 lg:w-3/12 border-solid border-2 border-sky-200 cursor-pointer p-4 m-auto mb-20 rounded-lg"><Link href="/product/binary-tree-white-XL"><a><img className="rounded h-80 w-full object-contain object-top mb-6" src="/images/binary-tree-white.jpg" alt="content" /><h3 className="tracking-widest text-sky-500 text-xs font-medium title-font">Tshirts</h3><h2 className="text-lg text-gray-900 font-medium title-font mb-4">Img Src (XL/white)</h2><p className="leading-relaxed text-base">Available in multiple sizes</p></a></Link>
-      </div>
-    </div>
-
-    <div className="flex flex-wrap -m-4">
-      <div className="xl:w-1/3 md:w-1/2 p-4">
-        <div className="border border-gray-200 p-6 rounded-lg">
-          <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-sky-100 text-sky-500 mb-4">
-            <FaTshirt />
-          </div>
-          <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Premium Tshirts</h2>
-          <p className="leading-relaxed text-base">Our T-Shirts are 100% made of cotton.</p>
-        </div>
-      </div>
-      <div className="xl:w-1/3 md:w-1/2 p-4">
-        <div className="border border-gray-200 p-6 rounded-lg">
-          <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-sky-100 text-sky-500 mb-4">
-            <FaShippingFast />
-          </div>
-          <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Free Shipping
-          </h2>
-          <p className="leading-relaxed text-base">We ship all over India for FREE.
-            </p>
-        </div>
-      </div>
-      <div className="xl:w-1/3 md:w-1/2 p-4">
-        <div className="border border-gray-200 p-6 rounded-lg">
-          <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-sky-100 text-sky-500 mb-4">
-            <MdLocalOffer />
-          </div>
-          <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Exciting Offers
-          </h2>
-          <p className="leading-relaxed text-base">We provide amazing offers & discounts on our products.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* <Footer /> */}
+      {/* footer */}
+      <Footer />
 
     </div>
   )
